@@ -1,0 +1,49 @@
+1) A marketing consultant is asking you some questions about rental pricing in the Sakila store. They want to understand how many titles
+ (distinct films) there are at each price point. Write a SQL statement that counts the number of films per rental price point.
+ 
+ Ans) 
+ SELECT film.rental_rate, COUNT(film.film_id)
+ FROM film
+ GROUP BY film.rental_rate;
+
+ Output result:
+ 0.99|341
+ 2.99|323
+ 4.99|336
+
+ 2) Modify your answer to (1) and now write a SQL statement that counts the total number of DVDs in inventory per rental price point.
+ Ans)
+ SELECT film.rental_rate, COUNT(film.film_id)
+ FROM inventory, film
+ WHERE inventory.film_id = film.film_id
+ GROUP BY film.rental_rate;
+ 
+ Output result:
+ 0.99|1595
+ 2.99|1481
+ 4.99|1505
+
+ 3) Modify your answer to (2) and write a SQL statement that counts that counts the total number of DVDs in inventory per rental price 
+ point that are "Action" movies.
+ Ans)
+ SELECT film.rental_rate, COUNT(film.film_id)
+ FROM category, film_category, inventory, film
+ WHERE category.name = 'Action' AND category.category_id = film_category.category_id AND film_category.film_id = inventory.film_id AND inventory.film_id = film.film_id
+ GROUP BY film.rental_rate
+
+ Output Result:
+ 0.99|138
+ 2.99|91
+ 4.99|83
+
+ 4) Write a SQL statement to find all actors that have acted in at least 5 Horror films.
+ SELECT actor.first_name, actor.last_name, COUNT(actor.actor_id)
+ FROM actor, film_actor, film_category, category, film
+ WHERE actor.actor_id = film_actor.actor_id AND film_actor.film_id = film.film_id AND film.film_id = film_category.film_id AND film_category.category_id = category.category_id AND category.name = "Horror"
+ GROUP BY actor.actor_id
+ HAVING COUNT(actor.actor_id) >= 5;
+ VIVIEN|BERGEN|5
+ JULIA|MCQUEEN|7
+ TOM|MIRANDA|6
+ HENRY|BERRY|5
+

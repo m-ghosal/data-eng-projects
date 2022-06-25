@@ -1,0 +1,16 @@
+1) Write the command that lists all the tables in the Sakila database
+Ans: after opening the database by typing in '.open sqlite-sakila.db', the '.table' command lists all the tables in the database
+
+2) In the "country" table, what is the data type for "country.country_id"?
+Ans: The data type for "country.country_id" is SMALLINT, and it is also ensured that this value can't be NULL. In order to find this out, I
+used the '.schema country' command, which outputed the structure of the 'country' table
+
+3) On what attribute does the "staff" table join with the "store" table?
+Ans: 'store_id'. The two commands I used to find this out are '.schema staff' and '.schema store' which outputed the structure of both the
+'staff' table and the 'store' table. From there, I could see that the 'store_id' was declared as a foreign key, and it was also present in
+'store' table, so I deduced that that would be the attribute that joins the two tables together. 
+
+4) Which column in the "film_text" table can have a null value?
+Ans: the 'description' column can have a null value. I found this out using the '.schema film_text' command which outputed the structure 
+of the data table, and then I looked at the different columns. 'film_id' and 'title' were explicitly said to be NOT NULL, so 'description' 
+was the only column that would accept null values.
